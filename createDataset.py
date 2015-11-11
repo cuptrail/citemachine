@@ -14,11 +14,11 @@ dblp = DBLP(path_to_dblp, max_docs=num_docs)
 with open(path_to_output, 'w') as document:
     for key in dblp.keys():
         output = ""
-        output += dblp.titles[key] + ","
-        output += dblp.authors[key] + ","
-        output += dblp.years[key] + ","
-        output += dblp.conferencces[key] + ","
-        output += dblp.citation_counts[key] + ","
-        output += dblp.references[key] + ","
-        output += dblp.abstracts[key] + "\n"
-    document.write(output)
+        output += str(dblp.titles[key]) + ","
+        output += str(dblp.authors[key]) + ","
+        output += str(dblp.years[key]) + ","
+        output += str(dblp.conferences[key]) + ","
+        output += str(dblp.citation_counts[key]) + ","
+        output += str(dblp.references[key]) + ","
+        output += str(dblp.abstracts[key]) + "\n"
+        document.write(output)
