@@ -1,7 +1,7 @@
 from datetime import date
 from collections import defaultdict
 from operator import itemgetter
-import cPickle
+import pickle
 
 from gensim.models.ldamodel import LdaModel
 
@@ -41,7 +41,7 @@ class LDARecommender(object):
         an old pickled instance, which might not provide newly implemented
         methods"""
         with open(pickle_path, 'rb') as pkl:
-            lda_recom = cPickle.load(pkl)
+            lda_recom = pickle.load(pkl)
 
         self = cls(corpus=lda_recom.corpus,
                    corpus_preprocessor=lda_recom.preprocessor, 

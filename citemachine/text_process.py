@@ -4,6 +4,7 @@ from citemachine.util import stem_all, BiDirMap, filter_dict
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.corpus import stopwords
 
+import copy
 
 class CorpusPreprocessor(object):
     """Class used to preprocess textual data from the provided corpus
@@ -123,7 +124,8 @@ class CorpusPreprocessor(object):
 
         # need to remove rare and popular words
         is_valid = self.is_valid_word
-        for word in word_counts.keys():
+        wc_list = list (word_counts.keys() )
+        for word in wc_list:
             if (not (min_word_count <= word_counts[word] <= max_word_count)) or (not is_valid(word)):
                 word_counts.pop(word, 0)
 

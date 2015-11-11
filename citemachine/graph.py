@@ -22,7 +22,7 @@ class CommunityRank(object):
 
     def _get_communities(self, partitions):
         community_sets = defaultdict(set)
-        for node, community in partitions.iteritems():
+        for node, community in partitions.items():
             community_sets[community].add(node)
         return community_sets
 
