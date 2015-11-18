@@ -27,9 +27,10 @@ class DBLP(object):
         self.citation_counts = {}
         self.references = {}
         self.abstracts = {}
+        self.missingrefs = {}
 
         title = auth = year = conf = cite_count = doc_id = \
-            line = refs = abstract = None
+            line = refs = abstract = missingrefs = None
 
         with open(src, 'r') as document:
 
@@ -145,11 +146,10 @@ class DBLP(object):
         is_in_index = lambda ref: ref in index
 
         for doc_id in index:
-            if self.references[doc_id] != filter(is_in_index,self.references[doc_id])
-                    self.missingrefs[doc_id] = 1
-            self.references[doc_id] = filter(is_in_index,
-                                             self.references[doc_id]
-                                                
+            if self.references[doc_id] != filter(is_in_index,self.references[doc_id]):
+                self.missingrefs[doc_id] = 1
+            self.references[doc_id] = filter(is_in_index,self.references[doc_id])
+
     def keys(self):
         """Returns ids of all documents in the index"""
         return self.titles.keys()
