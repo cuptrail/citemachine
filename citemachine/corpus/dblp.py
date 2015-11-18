@@ -89,6 +89,7 @@ class DBLP(object):
                             self.citation_counts[doc_id] = cite_count
                             self.references[doc_id] = refs
                             self.abstracts[doc_id] = abstract
+                            self.missingrefs[doc_id] = 0;
                             num_docs += 1
                     else:
                         self.titles[doc_id] = title
@@ -144,9 +145,11 @@ class DBLP(object):
         is_in_index = lambda ref: ref in index
 
         for doc_id in index:
+            if self.references[doc_id] != filter(is_in_index,self.references[doc_id])
+                    self.missingrefs[doc_id] = 1
             self.references[doc_id] = filter(is_in_index,
-                                             self.references[doc_id])
-
+                                             self.references[doc_id]
+                                                
     def keys(self):
         """Returns ids of all documents in the index"""
         return self.titles.keys()

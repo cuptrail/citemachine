@@ -17,7 +17,7 @@ with lite.connect(path_to_output) as con:
     cur = con.cursor();
     cur.execute("DROP TABLE IF EXISTS Articles")
     cur.execute("CREATE TABLE Articles(ID INT, Title TEXT, Author TEXT, \
-    Year TEXT, Conference TEXT, Cite_Count TEXT, Refs TEXT, Abstract TEXT)")
+    Year TEXT, Conference TEXT, Cite_Count TEXT, Refs TEXT, Abstract TEXT, Missing INT)")
     for key in dblp.keys():
         title = str(dblp.titles[key]) + ","
         author = str(dblp.authors[key]) + ","
@@ -26,5 +26,6 @@ with lite.connect(path_to_output) as con:
         cite_count = str(dblp.citation_counts[key]) + ","
         refs = str(dblp.references[key]) + ","
         abstract = str(dblp.abstracts[key]) + "\n"
-        cur.execute("INSERT INTO Articles VALUES(?,?,?,?,?,?,?,?)", (key, \
-        title, author, year, conference, cite_count, refs, abstract))
+        missing = dblp.missingrefs[key];
+        cur.execute("INSERT INTO Articles VALUES(?,?,?,?,?,?,?,?,?)", (key, \
+        title, author, year, conference, cite_count, refs, abstract, missing))
