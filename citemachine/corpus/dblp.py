@@ -146,8 +146,9 @@ class DBLP(object):
         is_in_index = lambda ref: ref in index
 
         for doc_id in index:
-            if self.references[doc_id] != filter(is_in_index,self.references[doc_id]):
-                self.missingrefs[doc_id] = 1
+            for ref in self.references[doc_id]:
+                if !(ref in index):
+                    self.missingrefs[doc_id] = 1
             self.references[doc_id] = filter(is_in_index,self.references[doc_id])
 
     def keys(self):
