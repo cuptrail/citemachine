@@ -7,7 +7,7 @@ path_to_dblp = 'acm_output.txt'
 #set to location for output sqlite database
 path_to_output = 'dblpextract.db'
 #set to a small value like 5000 to test on a subset of the data
-num_docs = 5000
+num_docs = None
 
 #parses the dataset
 dblp = DBLP(path_to_dblp, max_docs=num_docs)
@@ -19,13 +19,20 @@ with lite.connect(path_to_output) as con:
     cur.execute("CREATE TABLE Articles(ID INT, Title TEXT, Author TEXT, \
     Year TEXT, Conference TEXT, Cite_Count TEXT, Refs TEXT, Abstract TEXT, Missing INT)")
     for key in dblp.keys():
-        title = str(dblp.titles[key]) + ","
-        author = str(dblp.authors[key]) + ","
-        year = str(dblp.years[key]) + ","
-        conference = str(dblp.conferences[key]) + ","
-        cite_count = str(dblp.citation_counts[key]) + ","
-        refs = str(dblp.references[key]) + ","
-        abstract = str(dblp.abstracts[key]) + "\n"
+        title = str(dblp.titles[key])
+        title = unicode(title,"utf-8")
+        author = str(dblp.authors[key])
+        author = unicode(author,"utf-8")
+        year = str(dblp.years[key])
+        year = unicode(year,"utf-8")
+        conference = str(dblp.conferences[key])
+        conference = unicode(conference,"utf-8")
+        cite_count = str(dblp.citation_counts[key])
+        cite_count = unicode(cite_count,"utf-8")
+        refs = str(dblp.references[key])
+        refs = unicode(refs,"utf-8")
+        abstract = str(dblp.abstracts[key])
+        abstract = unicode(abstract,"utf-8")
         missing = dblp.missingrefs[key];
         cur.execute("INSERT INTO Articles VALUES(?,?,?,?,?,?,?,?,?)", (key, \
         title, author, year, conference, cite_count, refs, abstract, missing))
