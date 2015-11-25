@@ -82,7 +82,7 @@ class DBLP(object):
                 if line == '\n':
 
                     if only_with_refs_and_abstracts:
-                        if refs and abstract:
+                        if doc_id != 256753 and refs and abstract:
                             self.titles[doc_id] = title
                             self.authors[doc_id] = auth
                             self.years[doc_id] = year
