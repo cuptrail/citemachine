@@ -21,15 +21,19 @@ with lite.connect(path_to_output) as con:
     for key in dblp.keys():
         title = str(dblp.titles[key])
         title = unicode(title,"utf-8")
-        author = str(dblp.authors[key])
-        author = unicode(author,"utf-8")
+        author = ""
+        for auth in dblp.authors[key]:
+			author = author + str(auth) + ","
+		author = unicode(author,"utf-8")
         year = str(dblp.years[key])
         year = unicode(year,"utf-8")
         conference = str(dblp.conferences[key])
         conference = unicode(conference,"utf-8")
         cite_count = str(dblp.citation_counts[key])
         cite_count = unicode(cite_count,"utf-8")
-        refs = str(dblp.references[key])
+        refs = ""
+        for ref in dblp.references[key]:
+			refs = refs + str(ref) + ","
         refs = unicode(refs,"utf-8")
         abstract = str(dblp.abstracts[key])
         abstract = unicode(abstract,"utf-8")
