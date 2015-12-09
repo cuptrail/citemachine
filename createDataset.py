@@ -24,7 +24,7 @@ with lite.connect(path_to_output) as con:
         author = ""
         for auth in dblp.authors[key]:
 			author = author + str(auth) + ","
-		author = unicode(author,"utf-8")
+        author = unicode(author,"utf-8")
         year = str(dblp.years[key])
         year = unicode(year,"utf-8")
         conference = str(dblp.conferences[key])
